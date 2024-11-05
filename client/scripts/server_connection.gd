@@ -17,9 +17,10 @@ func _ready() -> void:
 func _process(delta) -> void:
 	if multiplayer.multiplayer_peer.get_connection_status() == MultiplayerPeer.CONNECTION_CONNECTED:
 		var packet_type = 01 # Hello Packet
+		var variant_type = 01
 		var message = "hello"
 		var packet: PackedByteArray = PackedByteArray()
 		packet.append(packet_type)
+		packet.append(variant_type)
 		packet.append_array(message.to_utf8_buffer())
 		multiplayer.multiplayer_peer.put_packet(packet)
-		await get_tree().create_timer(2).timeout

@@ -1,3 +1,3 @@
-pub fn handle_hello(){
-    println!("Receiving hello packet");
+pub fn handle_hello(data: &[u8]){
+    println!("Receiving hello packet {:?}",data);
 }

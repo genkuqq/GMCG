@@ -21,9 +21,9 @@ pub fn handle_packet(packet: &[u8]){
         return;
     }
     let packet_type = packet[0];
-    //let data = &packet[2..];
+    let data = &packet[2..];
     match PacketType::from_id(packet_type){
-        PacketType::Hello => handle_hello(),
+        PacketType::Hello => handle_hello(data),
         _ => (),
     }
 }
