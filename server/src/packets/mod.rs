@@ -2,14 +2,15 @@ pub mod hello;
 use crate::packets::hello::handle_hello;
 
 pub enum PacketType{
-    Hello = 1,
+    Unknown,
+    Hello,
 }
 
 impl PacketType{
-    pub fn from_id(id: u8) -> Option<Self> {
+    pub fn from_id(id: u8) -> Self {
         match id {
-            1 => Some(PacketType::Hello),
-            _ => None,
+            1 => PacketType::Hello,
+            _ => PacketType::Unknown,
         }
     }
 }
@@ -22,7 +23,7 @@ pub fn handle_packet(packet: &[u8]){
     let packet_type = packet[0];
     //let data = &packet[2..];
     match PacketType::from_id(packet_type){
-        Some(PacketType::Hello) => handle_hello(),
+        PacketType::Hello => handle_hello(),
         _ => (),
     }
 }
