@@ -15,6 +15,6 @@ func _ready() -> void:
 	peer.peer_disconnected.connect(func(id): print("Succesfully disconnected."))
 
 func _process(delta) -> void:
-	if multiplayer.multiplayer_peer.CONNECTION_CONNECTED:
+	if multiplayer.multiplayer_peer.get_connection_status() == MultiplayerPeer.CONNECTION_CONNECTED:
 		var packet = "hello"
 		multiplayer.send_bytes(packet.to_utf8_buffer(),1);
