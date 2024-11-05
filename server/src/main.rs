@@ -1,6 +1,7 @@
-use enet::{Address, Enet, Event, Host};
+use enet::{Address, Enet, Event, Host, Packet};
 use std::net::Ipv4Addr;
-
+mod packets;
+use packets::{PacketType, handle_packet}
 fn main() {
     let addr = Address::new(Ipv4Addr::new(127, 0, 0, 1), 1234);
     let enet = Enet::new().expect("Failed to initialize ENet");
@@ -21,15 +22,10 @@ fn main() {
             Some(Event::Disconnect(..)) => {
                 println!("disconnect!");
             }
-            Some(Event::Receive {
-                channel_id,
-                ref packet,
-                ..
-            }) => println!(
-                "got packet on channel {}, content: '{}'",
-                channel_id,
-                std::str::from_utf8(packet.data()).unwrap()
-            ),
+            Some(Event::Receive{ref peer,channel_id,ref packet}) =>{
+                let packet_data = packet.data();
+                handle_packet(packet_data);
+            }
             _ => (),
         }
     }
