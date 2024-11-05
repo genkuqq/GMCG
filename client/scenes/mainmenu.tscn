@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=3 uid="uid://scdp1ome7ugq"]
+
+[ext_resource type="Script" path="res://scripts/menu.gd" id="1_3cpoe"]
+
+[node name="Mainmenu" type="Node2D"]
+
+[node name="Menu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1152.0
+offset_bottom = 648.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource("1_3cpoe")
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 400
+theme_override_constants/margin_top = 280
+theme_override_constants/margin_right = 400
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/MarginContainer"]
+layout_mode = 2
+
+[node name="Play Button" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Play"
+
+[node name="Exit Button" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Exit"
+
+[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/Play Button" to="Menu" method="_on_play_button_pressed"]
+[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/Exit Button" to="Menu" method="_on_exit_button_pressed"]
