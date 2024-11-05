@@ -15,6 +15,7 @@ func _ready() -> void:
 	peer.peer_disconnected.connect(func(id): print("Succesfully disconnected."))
 
 func _process(delta) -> void:
+	multiplayer.multiplayer_peer.poll()
 	if multiplayer.multiplayer_peer.get_connection_status() == MultiplayerPeer.CONNECTION_CONNECTED:
 		var packet_type = 01 # Hello Packet
 		var variant_type = 01
@@ -24,3 +25,5 @@ func _process(delta) -> void:
 		packet.append(variant_type)
 		packet.append_array(message.to_utf8_buffer())
 		multiplayer.multiplayer_peer.put_packet(packet)
+	if multiplayer.multiplayer_peer.get_connection_status() == MultiplayerPeer.CONNECTION_DISCONNECTED:
+		get_tree().change_scene_to_file("res://scenes/disconnect_popup.tscn")
