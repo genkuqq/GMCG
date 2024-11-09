@@ -8,28 +8,7 @@ use crate::packets::chat::handle_chat;
 use crate::packets::matchmaking::handle_matchmaking;
 use crate::packets::gamestate::handle_gamestate;
 use crate::packets::gameplay::handle_gameplay;
-
-pub enum PacketType{
-    Unknown,
-    Hello,
-    MatchMaking,
-    GameState,
-    Gameplay,
-    Chat,
-}
-
-impl PacketType{
-    pub fn from_id(id: u8) -> Self {
-        match id {
-            1 => PacketType::Hello,
-            2 => PacketType::MatchMaking,
-            3 => PacketType::GameState,
-            4 => PacketType::Gameplay,
-            5 => PacketType::Chat,
-            _ => PacketType::Unknown,
-        }
-    }
-}
+use crate::types::packet::PacketType;
 
 pub fn handle_packet(packet: &[u8]){
     if packet.len() < 2{

@@ -1,6 +1,7 @@
 use enet::{Address, Enet, Event, Host};
 use std::net::Ipv4Addr;
 mod packets;
+mod types;
 use packets::handle_packet;
 fn main() {
     let addr = Address::new(Ipv4Addr::new(127, 0, 0, 1), 1234);
