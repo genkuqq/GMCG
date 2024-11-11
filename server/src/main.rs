@@ -22,9 +22,14 @@ fn main() {
             Some(Event::Disconnect(..)) => {
                 println!("disconnect!");
             }
-            Some(Event::Receive {ref packet,..}) =>{
+            Some(Event::Receive {ref mut sender,ref packet,..}) =>{
                 let packet_data = packet.data();
-                handle_packet(packet_data);
+                match packet_data[0]{
+                    1 =>{
+                        handle_packet(packet_data,sender);
+                    }
+                    _ => (),
+                }
             }
             _ => (),
         }
