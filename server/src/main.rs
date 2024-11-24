@@ -3,6 +3,9 @@ use std::time::{Duration,SystemTime,Instant};
 use renet::{ConnectionConfig,DefaultChannel,RenetServer,ServerEvent};
 use renet::transport::{NetcodeServerTransport,ServerAuthentication,ServerConfig};
 
+mod types;
+
+
 fn main(){
     let mut server = RenetServer::new(ConnectionConfig::default());
     let socket: UdpSocket = UdpSocket::bind("127.0.0.1:1234").unwrap();
