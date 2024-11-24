@@ -28,7 +28,7 @@ fn main(){
                 ServerEvent::ClientConnected { client_id } => {
                     println!("Client {client_id} connected");
                     server.send_message(client_id, 0, "Welcome!");
-                    server.broadcast_message(DefaultChannel::Unreliable, "A user joined to server.");
+                    server.broadcast_message(DefaultChannel::ReliableOrdered, "A user joined to server.");
 
                 }
                 ServerEvent::ClientDisconnected { client_id, reason } => {
@@ -38,7 +38,7 @@ fn main(){
         }
 
         for client_id in server.clients_id() {
-            while let Some(message) = server.receive_message(client_id, DefaultChannel::Unreliable) {
+            while let Some(message) = server.receive_message(client_id, DefaultChannel::ReliableOrdered) {
                 println!("Message: {} {:?}",client_id,message);
             }
         }
