@@ -3,6 +3,7 @@ use std::net::Ipv4Addr;
 use std::time::Duration;
 
 mod types;
+mod utils;
 
 fn main(){
     let enet = Enet::new().expect("could not initialize ENet");
