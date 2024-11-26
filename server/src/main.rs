@@ -1,4 +1,5 @@
 use enet::*;
+use types::MatchMaking;
 use std::net::Ipv4Addr;
 use std::time::Duration;
 
@@ -38,6 +39,9 @@ fn main(){
                         channel_id,
                         std::str::from_utf8(packet.data()).unwrap()
                     );
+                    let peer = host.peer_mut(event.peer_id).unwrap();
+                    let test_packet = Packet::new(b"Hello".to_vec(), PacketMode::ReliableSequenced).unwrap();
+                    peer.send_packet(test_packet, 0);
                     let a = event.peer_id;
                     print!("{:#?}", a);
                 }
