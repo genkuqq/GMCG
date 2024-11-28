@@ -1,24 +1,9 @@
 use std::collections::HashMap;
 
-pub type PlayerID = u64;
+use super::card::Card; 
+use super::player::{Player, PlayerID};
 
-pub enum Suit{
-    Hearts,
-    Diamonds,
-    Clubs,
-    Spades,
-}
-
-pub struct Card{
-    rank: u8,
-    suit: Suit,
-}
-
-pub struct Player{
-    id: PlayerID,
-    hand: Vec<Card>,
-}
-
+#[derive(PartialEq)]
 pub enum Stage{
     PreGame,
     InGame,
@@ -26,10 +11,10 @@ pub enum Stage{
 }
 
 pub struct GameState{
-    players: HashMap<PlayerID, Player>,
-    stage: Stage,
-    deck: Vec<Card>,
-    active_player: PlayerID,
+    pub players: HashMap<PlayerID, Player>,
+    pub stage: Stage,
+    pub deck: Vec<Card>,
+    pub active_player: PlayerID,
 }
 
 pub enum GameEvent{
@@ -39,3 +24,4 @@ pub enum GameEvent{
     PlayerDisconnected {player_id: PlayerID},
     PlayCard {player_id:PlayerID, card: Card}
 }
+
