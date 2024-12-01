@@ -48,7 +48,7 @@ async fn main(){
                     match data[0]{
                         0 => {
                             print!("test");
-                            pool.clone().set_user_state(event.peer_id, user::UserState::Searching);
+                            pool.clone().set_user_state(event.peer_id, user::UserState::Searching).await;
                         },
                         1 => print!("data 1"),
                         _ => print!("baska")

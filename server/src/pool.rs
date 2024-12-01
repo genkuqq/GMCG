@@ -25,15 +25,15 @@ impl IdlePool {
     }
 
     pub async fn set_user_state(&self, user_id: PeerID, state: UserState) {
-    let mut pool_lock = self.players.lock().await;
+        let mut pool_lock = self.players.lock().await;
     
-    if let Some(player) = pool_lock.get_mut(&user_id) {
-        println!("User found: {:?}, changing state to {:?}", player.id, state);
-        player.state = state;
-    } else {
-        println!("User with ID {:?} not found in the pool!", user_id);
+        if let Some(player) = pool_lock.get_mut(&user_id) {
+            println!("User found: {:?}, changing state to {:?}", player.id, state);
+            player.state = state;
+        } else {
+            println!("User with ID {:?} not found in the pool!", user_id);
+        }
     }
-}
 }
 
 
